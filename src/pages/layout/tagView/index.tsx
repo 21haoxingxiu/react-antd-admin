@@ -6,6 +6,7 @@ import { setActiveTag, removeTag, addTag } from '~/actions/tagsView.action'
 import { useNavigate, useLocation } from 'react-router-dom'
 import TagsViewAction from './tagViewAction'
 import usePrevious from '~/hooks/usePrevious'
+import { PageTab } from './style'
 
 const { TabPane } = Tabs
 
@@ -66,7 +67,7 @@ const TagsView: FC = () => {
   }, [activeTagId, prevActiveTagId])
 
   return (
-    <div id="pageTabs">
+    <PageTab>
       <Tabs
         tabBarStyle={{ margin: 0 }}
         onChange={onChange}
@@ -80,7 +81,7 @@ const TagsView: FC = () => {
           <TabPane tab={tag.label[locale]} key={tag.id} closable={tag.closable} />
         ))}
       </Tabs>
-    </div>
+    </PageTab>
   )
 }
 

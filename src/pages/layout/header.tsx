@@ -78,7 +78,7 @@ const HeaderComponent: FC<Props> = ({ collapsed, toggle }) => {
       {device !== 'MOBILE' && (
         <div className="logo" style={{ width: collapsed ? 80 : 200 }}>
           <img src={ReactSvg} alt="" style={{ marginRight: collapsed ? '2px' : '20px' }} />
-          <img src={AntdSvg} alt="" />
+          {/* <img src={AntdSvg} alt="" /> */}
         </div>
       )}
       <div className="layout-page-header-main">

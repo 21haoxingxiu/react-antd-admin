@@ -121,17 +121,6 @@ const LayoutPage: FC = () => {
         </Content>
       </Layout>
       <Footer className="layout-page-footer">
-        <Text>
-          github:{' '}
-          <a
-            style={{ color: 'royalblue' }}
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://github.com/WinmezzZ/react-antd-admin"
-          >
-            https://github.com/WinmezzZ/react-antd-admin
-          </a>
-        </Text>
         <br />
         <Text>赣ICP备18008240号 | Copyright © 2019 - 2020 </Text>
       </Footer>
