@@ -177,6 +177,7 @@ declare module 'react-router-dom' {
 
 declare interface Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function
+  Glod: any
   less: {
     modifyVars: (arg: any) => Promise<any>
   }

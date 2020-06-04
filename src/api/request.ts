@@ -1,9 +1,32 @@
+/*
+ * @Description: new file
+ * @Autor: zhan
+ * @Date: 2020-06-03 10:32:58
+ * @LastEditors: zhan
+ * @LastEditTime: 2020-06-04 16:38:08
+ */
 import axios, { AxiosRequestConfig } from 'axios'
 import { message as $message } from 'antd'
 
-axios.defaults.timeout = 6000
+let baseURL
+// 判断开发环境（一般用于本地代理）
+if (process.env.NODE_ENV === 'development') {
+  // 开发环境
+  baseURL = '/'
+} else {
+  // 编译环境
+  baseURL = window.Glod && window.Glod.BaseUrl
+}
 
-axios.interceptors.request.use(
+const service = axios.create({
+  baseURL: baseURL,
+  timeout: 60000,
+  headers: {
+    contentType: 'application/jsoncharset=utf-8'
+  }
+})
+
+service.interceptors.request.use(
   config => {
     return config
   },
@@ -12,7 +35,7 @@ axios.interceptors.request.use(
   }
 )
 
-axios.interceptors.response.use(
+service.interceptors.response.use(
   config => {
     if (config?.data?.message) {
       // $message.success(config.data.message)
@@ -54,15 +77,17 @@ export const request = <T = any>(
   method: Method,
   url: string,
   data?: any,
+  params?: any,
   config?: AxiosRequestConfig
 ): MyResponse<T> => {
   // const prefix = '/api'
   const prefix = ''
   url = prefix + url
   if (method === 'post') {
-    return axios.post(url, data, config)
+    console.log('params', data || params)
+    return service.post(url, data || params, config)
   } else {
-    return axios.get(url, {
+    return service.get(url, {
       params: data,
       ...config
     })

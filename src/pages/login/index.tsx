@@ -7,9 +7,10 @@ import { loginAsync } from '~/actions/user.action'
 import { LoginParams } from '~/interface/user/login'
 
 const initialValues: LoginParams = {
-  username: 'guest',
-  password: 'guest'
-  // remember: true
+  username: 'admin',
+  password: '123456',
+  scope: 'server',
+  grant_type: 'password'
 }
 
 const LoginForm: FC = () => {
@@ -18,10 +19,18 @@ const LoginForm: FC = () => {
   const dispatch = useDispatch()
 
   const onFinished = async (form: any) => {
-    const res = Boolean(dispatch(await loginAsync(form)))
+    const res = Boolean(
+      dispatch(
+        await loginAsync({
+          ...form,
+          scope: 'server',
+          grant_type: 'password'
+        })
+      )
+    )
     if (res) {
-      const { from } = (location.state as any) || { from: { pathname: '/dashboard' } }
-      navigate(from)
+      // const { from } = (location.state as any) || { from: { pathname: '/dashboard' } }
+      // navigate(from)
     }
   }
 

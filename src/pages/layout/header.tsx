@@ -13,7 +13,6 @@ import { ReactComponent as EnUsSvg } from '~/assets/header/en_US.svg'
 import { setGlobalItem } from '~/actions/global.action'
 import { LocaleFormatter, useLocale } from '~/locales'
 import ReactSvg from '~/assets/logo/react.svg'
-import AntdSvg from '~/assets/logo/antd.svg'
 
 const { Header } = Layout
 
@@ -78,7 +77,6 @@ const HeaderComponent: FC<Props> = ({ collapsed, toggle }) => {
       {device !== 'MOBILE' && (
         <div className="logo" style={{ width: collapsed ? 80 : 200 }}>
           <img src={ReactSvg} alt="" style={{ marginRight: collapsed ? '2px' : '20px' }} />
-          {/* <img src={AntdSvg} alt="" /> */}
         </div>
       )}
       <div className="layout-page-header-main">

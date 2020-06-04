@@ -2,10 +2,10 @@
 export type Role = 'guest' | 'admin'
 
 export interface LoginParams {
-  /** 用户名 */
   username: string
-  /** 用户密码 */
-  password: string
+  password: string,
+  scope: string,
+  grant_type: string,
 }
 
 export interface LoginResult {
@@ -14,6 +14,12 @@ export interface LoginResult {
   username: string
   role: Role
 }
+
+export interface UserParams {
+  token: string
+}
+
+export interface UserResult {}
 
 export interface LogoutParams {
   token: string
