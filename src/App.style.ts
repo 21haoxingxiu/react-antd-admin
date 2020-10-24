@@ -3,9 +3,10 @@
  * @Autor: zhan
  * @Date: 2020-06-03 17:25:35
  * @LastEditors: zhan
- * @LastEditTime: 2020-06-04 13:53:20
- */ 
-import { createGlobalStyle } from 'styled-components';
+ * @LastEditTime: 2020-06-07 11:19:28
+ */
+
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -58,4 +59,4 @@ a{
 	text-decoration: none;
 	color: #fff;
 }
-`;
+`

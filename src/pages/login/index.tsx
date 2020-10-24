@@ -1,60 +1,90 @@
-import React, { FC } from 'react'
-import { Button, Checkbox, Form, Input } from 'antd'
-import './index.less'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { loginAsync } from '~/actions/user.action'
-import { LoginParams } from '~/interface/user/login'
+import React from 'react'
+import { connect } from 'react-redux'
+// import { renderRoutes, RouteConfig } from 'react-router-config'
+// import { useHistory } from 'react-router-dom'
+// import { forceCheck } from 'react-lazyload'
+import { loginDispatch } from './store/actionCreators'
+import { EnterLoading } from '~/styles/globalStyle'
+import { Form, Input, Button } from 'antd'
+import { UserOutlined, LockTwoTone } from '@ant-design/icons'
+import { LoginFormData } from './store/data'
+import Loading from '~/components/Loading'
+import { Content, Header } from './styles'
 
-const initialValues: LoginParams = {
-  username: 'admin',
-  password: '123456',
-  scope: 'server',
-  grant_type: 'password'
+interface LoginProps {
+  enterLoading: boolean
+  loginDispatch: (params: LoginFormData) => void
 }
 
-const LoginForm: FC = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const dispatch = useDispatch()
-
-  const onFinished = async (form: any) => {
-    const res = Boolean(
-      dispatch(
-        await loginAsync({
-          ...form,
-          scope: 'server',
-          grant_type: 'password'
-        })
-      )
-    )
-    if (res) {
-      // const { from } = (location.state as any) || { from: { pathname: '/dashboard' } }
-      // navigate(from)
-    }
+const Login: React.FC<LoginProps> = ({ enterLoading, loginDispatch }) => {
+  const handleSubmit = async (values: LoginFormData) => {
+    console.log(values)
+    await loginDispatch(values)
+    // const history = useHistory()
+    // history.push('/home')
   }
-
   return (
-    <div className="login-page">
-      <Form onFinish={onFinished} className="login-page-form" initialValues={initialValues}>
-        <h2>REACT ANTD ADMIN</h2>
-        <Form.Item name="username" rules={[{ required: true, message: '请输入用户名！' }]}>
-          <Input placeholder="用户名" defaultValue="guest" />
-        </Form.Item>
-        <Form.Item name="password" rules={[{ required: true, message: '请输入密码！' }]}>
-          <Input type="password" placeholder="密码" defaultValue="guest" />
-        </Form.Item>
-        <Form.Item name="remember" valuePropName="checked">
-          <Checkbox>记住用户</Checkbox>
-        </Form.Item>
-        <Form.Item>
-          <Button htmlType="submit" type="primary" className="login-page-form_button">
-            登录
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+    <Content>
+      <Header>
+        <span className="title">React 后台应用</span>
+      </Header>
+      <div className="desc is-center">管理系统 React 应用模版</div>
+      <div className="content">
+        <Form
+          size="large"
+          onFinish={values => {
+            handleSubmit(values as LoginFormData)
+          }}
+        >
+          <Form.Item
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: '请输入用户名!'
+              }
+            ]}
+          >
+            <Input prefix={<UserOutlined className="login-prefix-icon" />} placeholder="请输入用户名" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: '请输入密码!'
+              }
+            ]}
+          >
+            <Input.Password prefix={<LockTwoTone className="login-prefix-icon" />} placeholder="请输入密码" />
+          </Form.Item>
+          <Form.Item>
+            <Button block type="primary" htmlType="submit">
+              登录
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+      {enterLoading ? (
+        <EnterLoading>
+          <Loading></Loading>
+        </EnterLoading>
+      ) : null}
+    </Content>
   )
 }
+// 映射Redux全局的state到组件的props上
+const mapStateToProps = (state: any) => ({
+  enterLoading: state.login.enterLoading
+})
+// 映射dispatch到props上
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    loginDispatch(params: LoginFormData) {
+      dispatch(loginDispatch(params))
+    }
+  }
+}
 
-export default LoginForm
+// 将ui组件包装成容器组件
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Login))

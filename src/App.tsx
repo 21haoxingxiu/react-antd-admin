@@ -10,7 +10,7 @@ import zhCN from 'antd/es/locale/zh_CN'
 import moment from 'moment'
 import 'moment/locale/zh-cn'
 import { RenderRoutes } from './routes'
-import { GlobalStyle } from './App.style';
+import { GlobalStyle } from './App.style'
 
 const App: React.FC = () => {
   const { locale } = useSelector((state: AppState) => state.globalReducer)
