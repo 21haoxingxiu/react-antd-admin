@@ -3,11 +3,12 @@
  * @Autor: zhan
  * @Date: 2020-06-07 10:47:59
  * @LastEditors: zhan
- * @LastEditTime: 2020-06-07 11:19:22
+ * @LastEditTime: 2020-10-25 11:54:34
  */
 
 import styled from 'styled-components'
 
 export const PageTab = styled.div`
-  padding: 5px 10px;
+  background: rgb(255, 255, 255);
+  padding: 6px 4px;
 `

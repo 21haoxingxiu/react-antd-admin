@@ -5,7 +5,7 @@ import configureStore from './stores'
 import { Provider } from 'react-redux'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
-// import './mock'
+import './mock'
 const store = configureStore()
 
 const render = (Router: React.FC) => {

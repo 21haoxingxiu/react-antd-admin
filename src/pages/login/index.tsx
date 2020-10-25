@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { loginDispatch } from './store/actionCreators'
 import { EnterLoading } from '~/styles/globalStyle'
 import { Form, Input, Button } from 'antd'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { UserOutlined, LockTwoTone } from '@ant-design/icons'
 import { LoginFormData } from './store/data'
 import Loading from '~/components/Loading'
@@ -17,11 +18,14 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ enterLoading, loginDispatch }) => {
+  const location = useLocation()
+  const navigate = useNavigate()
   const handleSubmit = async (values: LoginFormData) => {
-    console.log(values)
-    await loginDispatch(values)
+    // const res = await loginDispatch(values)
     // const history = useHistory()
     // history.push('/home')
+    const { from } = (location.state as any) || { from: { pathname: '/dashboard' } }
+    navigate(from)
   }
   return (
     <Content>
