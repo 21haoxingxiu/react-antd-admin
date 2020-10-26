@@ -7,7 +7,7 @@
  */
 
 import { request as service } from './request'
-import { LoginResult, LoginParams, UserParams, UserResult, LogoutParams, LogoutResult } from '../interface/user/login'
+import { LoginParams, UserParams, LogoutParams, LogoutResult } from '../interface/user/login'
 
 /** 登录接口 */
 export const apiLogin = (params: LoginParams) => {

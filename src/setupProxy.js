@@ -9,7 +9,7 @@ module.exports = function(app) {
     // proxy('http://localhost:2000')
 
     proxy('/api', {
-      target: `http://localhost:${process.env.PORT}/api`,
+      target: `http://10.200.10.166:8081`,
       changeOrigin: true,
       pathRewrite: {
         '^/api': ''

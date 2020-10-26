@@ -21,7 +21,7 @@ const Login: React.FC<LoginProps> = ({ enterLoading, loginDispatch }) => {
   const location = useLocation()
   const navigate = useNavigate()
   const handleSubmit = async (values: LoginFormData) => {
-    // const res = await loginDispatch(values)
+    await loginDispatch(values)
     // const history = useHistory()
     // history.push('/home')
     const { from } = (location.state as any) || { from: { pathname: '/dashboard' } }

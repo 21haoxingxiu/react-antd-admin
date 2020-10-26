@@ -16,7 +16,7 @@ interface Props {
 }
 
 const MenuComponent: FC<Props> = ({ menuList }) => {
-  const [openKeys, setOpenkeys] = useState<string[]>([])
+  const [openKeys, setOpenkeys] = useState<Array<string>>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
   const { collapsed, device, locale } = useSelector((state: AppState) => state.globalReducer)
   const dispatch = useDispatch()
@@ -61,7 +61,7 @@ const MenuComponent: FC<Props> = ({ menuList }) => {
       theme="light"
       selectedKeys={selectedKeys}
       openKeys={openKeys}
-      onOpenChange={keys => setOpenkeys([keys.pop()!])}
+      onOpenChange={keys => setOpenkeys([keys.pop()?.toString()!])}
       className="layout-page-sider-menu"
     >
       {menuList?.map(menu =>

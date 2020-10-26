@@ -27,7 +27,7 @@ export const loginDispatch = (param: LoginFormData) => {
   return (dispatch: any) => {
     dispatch(changeEnterLoadingAction(true))
     loginRequest(param)
-      .then((data: any) => {
+      .then(() => {
         dispatch(changeEnterLoadingAction(false))
       })
       .catch(() => {

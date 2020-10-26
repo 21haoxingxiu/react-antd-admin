@@ -15,7 +15,7 @@ export const loginRequest = (params: LoginFormData) => {
   const scope = 'server'
   const grant_type = 'password'
   return request({
-    url: '/auth/oauth/token',
+    url: '/api/auth/oauth/token',
     headers: {
       isToken: false,
       'TENANT-ID': '1',
