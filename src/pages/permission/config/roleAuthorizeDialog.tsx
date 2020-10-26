@@ -31,7 +31,7 @@ const RoleAuthorizeDialog: FC<RoleModifyDialogProps> = ({ onAuthorize, onCancel,
 
   const initData = useCallback(async () => {
     const { result, status } = await getMenuList()
-    if (status) {
+    if (status && result) {
       // format treeData
       setTreeData(
         result.map(a => ({

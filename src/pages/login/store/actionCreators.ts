@@ -8,6 +8,9 @@
 import * as actionTypes from './constants'
 import { LoginFormData } from './data.d'
 import { loginRequest } from './services'
+import { ThunkAction } from 'redux-thunk'
+import { setToken } from '~/utils/store'
+import { AppState } from '~/stores'
 
 export interface LoginType {
   type: typeof actionTypes.LOGIN
@@ -23,15 +26,19 @@ export const changeEnterLoadingAction = (data: boolean): ChangeEnterLoadingType 
   data
 })
 
-export const loginDispatch = (param: LoginFormData) => {
-  return (dispatch: any) => {
+export const loginDispatch = (
+  param: LoginFormData
+): ThunkAction<Promise<boolean>, AppState, null, ChangeEnterLoadingType> => {
+  return async (dispatch: any) => {
     dispatch(changeEnterLoadingAction(true))
-    loginRequest(param)
-      .then(() => {
+    const res = await loginRequest(param)
+    if (res) {
+      if (res.data && res.data.access_token) {
+        setToken(res.data.access_token)
         dispatch(changeEnterLoadingAction(false))
-      })
-      .catch(() => {
-        console.log('登录失败')
-      })
+      }
+      return true
+    }
+    return false
   }
 }

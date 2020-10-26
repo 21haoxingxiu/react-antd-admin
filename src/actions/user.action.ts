@@ -4,6 +4,7 @@ import { LoginParams, Role } from '~/interface/user/login'
 import { ThunkAction } from 'redux-thunk'
 import { apiLogin, apiLogout } from '~/api/user.api'
 import { AppState } from '~/stores'
+import { getToken, removeToken } from '~/utils/store'
 
 export interface UserState {
   username: string
@@ -52,14 +53,14 @@ export const loginAsync = (payload: LoginParams): ThunkAction<Promise<boolean>, 
 
 export const logoutAsync = (): ThunkAction<Promise<boolean>, AppState, null, SetUserItem> => {
   return async dispatch => {
-    const { status } = await apiLogout({ token: localStorage.getItem('t')! })
+    const { status } = await apiLogout({ token: getToken() || '' })
     if (status) {
-      localStorage.clear()
       dispatch(
         setUserItem({
           logged: false
         })
       )
+      removeToken()
       return true
     }
     return false

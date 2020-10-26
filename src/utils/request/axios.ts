@@ -1,6 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import GlobalLoading from '~/components/GlobalLoading'
 import { filterObject } from '../filter'
+import { getToken, removeToken } from '~/utils/store'
+import { message as $message } from 'antd'
 
 // 处理请求 loading
 let loadingCount = 0
@@ -9,6 +11,11 @@ function loadingInterceptors(instance: AxiosInstance): void {
   const openLoading = (config: AxiosRequestConfig): AxiosRequestConfig => {
     GlobalLoading.open()
     loadingCount++
+    /* 携带token */
+    console.log('getToken()', getToken())
+    if (getToken()) {
+      config.headers['Authorization'] = 'Bearer ' + getToken()
+    }
     return config
   }
   // 关闭 loading
@@ -23,11 +30,19 @@ function loadingInterceptors(instance: AxiosInstance): void {
   instance.interceptors.request.use(openLoading)
   instance.interceptors.response.use(
     response => {
+      const status = Number(response.status) || 200
+      if (status === 401) {
+        /* 返回登录页 */
+        removeToken()
+      }
       closeLoading()
       return response
     },
     e => {
+      console.log('e', e)
+      const errorMessage = '操作失败，请重新再试'
       closeLoading()
+      $message.error(errorMessage)
       throw e
     }
   )

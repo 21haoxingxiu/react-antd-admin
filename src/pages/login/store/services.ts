@@ -6,15 +6,12 @@
  * @LastEditTime: 2020-10-24 16:18:32
  */
 import { request } from '~/utils/request'
-import { LoginFormData } from './data'
+import { LoginFormData, LoginResult } from './data'
 /**
  * @description: 用户名 密码登录
  */
-export const loginRequest = (params: LoginFormData) => {
-  const { username, password } = params
-  const scope = 'server'
-  const grant_type = 'password'
-  return request({
+export const loginRequest = (params: LoginFormData) =>
+  request<LoginResult>({
     url: '/api/auth/oauth/token',
     headers: {
       isToken: false,
@@ -22,6 +19,5 @@ export const loginRequest = (params: LoginFormData) => {
       Authorization: 'Basic ZW1wOmVtcA=='
     },
     method: 'post',
-    params: { username, password, grant_type, scope }
+    params: { username: params.username, password: params.password, grant_type: 'password', scope: 'server' }
   })
-}

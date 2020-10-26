@@ -21,11 +21,14 @@ const Login: React.FC<LoginProps> = ({ enterLoading, loginDispatch }) => {
   const location = useLocation()
   const navigate = useNavigate()
   const handleSubmit = async (values: LoginFormData) => {
-    await loginDispatch(values)
+    const result = await loginDispatch(values)
     // const history = useHistory()
     // history.push('/home')
-    const { from } = (location.state as any) || { from: { pathname: '/dashboard' } }
-    navigate(from)
+    /* if(result)  无法测试其真实性 */
+    if (result !== null) {
+      const { from } = (location.state as any) || { from: { pathname: '/dashboard' } }
+      navigate(from)
+    }
   }
   return (
     <Content>
@@ -63,17 +66,12 @@ const Login: React.FC<LoginProps> = ({ enterLoading, loginDispatch }) => {
             <Input.Password prefix={<LockTwoTone className="login-prefix-icon" />} placeholder="请输入密码" />
           </Form.Item>
           <Form.Item>
-            <Button block type="primary" htmlType="submit">
+            <Button block type="primary" htmlType="submit" loading={enterLoading}>
               登录
             </Button>
           </Form.Item>
         </Form>
       </div>
-      {enterLoading ? (
-        <EnterLoading>
-          <Loading></Loading>
-        </EnterLoading>
-      ) : null}
     </Content>
   )
 }
