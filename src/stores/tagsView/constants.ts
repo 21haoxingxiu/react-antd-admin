@@ -1,0 +1,5 @@
+export const SET_ACTIVE_TAG = 'tagsView/SET_ACTIVE_TAG'
+export const ADD_TAG = 'tagsView/ADD_TAG'
+export const REMOVE_TAG = 'tagsView/REMOVE_TAG'
+export const REMOVE_ALL_TAG = 'tagsView/REMOVE_ALL_TAG'
+export const REMOVE_THER_TAG = 'tagsView/REMOVE_THER_TAG'

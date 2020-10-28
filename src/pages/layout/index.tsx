@@ -11,7 +11,7 @@ import TagsView from './tagView'
 import SuspendFallbackLoading from './suspendFallbackLoading'
 import { getMenuList } from '~/api/layout.api'
 import { MenuList, MenuChild } from '~/interface/layout/menu.interface'
-import { setUserItem } from '~/actions/user.action'
+// import { setUserItem } from '~/actions/user.action'
 import ThemeSwitch from './themeSwitch'
 import { useGuide } from '../guide/useGuide'
 import { Outlet, useLocation, useNavigate } from 'react-router'
@@ -57,21 +57,21 @@ const LayoutPage: FC = () => {
     return MenuListAll
   }
 
-  const fetchMenuList = useCallback(async () => {
-    const { status, result } = await getMenuList()
-    if (status && result) {
-      setMenuList(result)
-      dispatch(
-        setUserItem({
-          menuList: initMenuListAll(result)
-        })
-      )
-    }
-  }, [dispatch])
+  // const fetchMenuList = useCallback(async () => {
+  //   const { status, result } = await getMenuList()
+  //   if (status && result) {
+  //     setMenuList(result)
+  //     dispatch(
+  //       setUserItem({
+  //         menuList: initMenuListAll(result)
+  //       })
+  //     )
+  //   }
+  // }, [dispatch])
 
-  useEffect(() => {
-    fetchMenuList()
-  }, [fetchMenuList])
+  // useEffect(() => {
+  //   fetchMenuList()
+  // }, [fetchMenuList])
 
   useEffect(() => {
     window.onresize = () => {

@@ -4,7 +4,7 @@ import { Layout, Dropdown, Menu } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import HeaderNoticeComponent from './notice'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutAsync } from '~/actions/user.action'
+// import { logoutAsync } from '~/actions/user.action'
 import Avator from '~/assets/header/avator.jpeg'
 import { AppState } from '~/stores'
 import { ReactComponent as LanguageSvg } from '~/assets/header/language.svg'
@@ -24,7 +24,7 @@ interface Props {
 type Action = 'userInfo' | 'userSetting' | 'logout'
 
 const HeaderComponent: FC<Props> = ({ collapsed, toggle }) => {
-  const { logged } = useSelector((state: AppState) => state.userReducer)
+  // const { logged } = useSelector((state: AppState) => state.userReducer)
   const { locale, device } = useSelector((state: AppState) => state.globalReducer)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -36,10 +36,10 @@ const HeaderComponent: FC<Props> = ({ collapsed, toggle }) => {
         return
       case 'userSetting':
         return
-      case 'logout':
-        const res = Boolean(await dispatch(logoutAsync()))
-        res && navigate('/login')
-        return
+      // case 'logout':
+      //   const res = Boolean(await dispatch(logoutAsync()))
+      //   res && navigate('/login')
+      //   return
     }
   }
 
@@ -102,7 +102,7 @@ const HeaderComponent: FC<Props> = ({ collapsed, toggle }) => {
               <LanguageSvg id="language-change" />
             </span>
           </Dropdown>
-          {logged ? (
+          {/* {logged ? (
             <Dropdown overlay={menu} trigger={['click']}>
               <span className="user-action">
                 <img src={Avator} className="user-avator" />
@@ -112,7 +112,7 @@ const HeaderComponent: FC<Props> = ({ collapsed, toggle }) => {
             <span style={{ cursor: 'pointer' }} onClick={toLogin}>
               {formatMessage({ id: 'gloabal.tips.login' })}
             </span>
-          )}
+          )} */}
         </div>
       </div>
     </Header>

@@ -5,5 +5,4 @@
  * @LastEditors: zhan
  * @LastEditTime: 2020-10-24 16:19:08
  */
-export const LOGIN = 'login/LOGIN'
-export const CHANGE_ENTER_LOADING = 'login/CHANGE_ENTER_LOADING'
+export const SET_USER_ITEM = 'SET_USER_ITEM'

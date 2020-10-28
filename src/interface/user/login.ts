@@ -1,28 +1,9 @@
-/** user's role */
-export type Role = 'guest' | 'admin'
-
-export interface LoginParams {
+export interface LoginFormData {
   username: string
-  password: string,
-  scope: string,
-  grant_type: string,
+  password: string
 }
 
 export interface LoginResult {
-  /** auth token */
   token: string
-  username: string
-  role: Role
+  username: ''
 }
-
-export interface UserParams {
-  token: string
-}
-
-export interface UserResult {}
-
-export interface LogoutParams {
-  token: string
-}
-
-export interface LogoutResult {}
